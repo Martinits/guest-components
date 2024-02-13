@@ -54,6 +54,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "ahash"
+version = "0.8.8"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "42cd52102d3df161c77a887b608d7a4897d7cc112886a9537b738a887a03aaff"
+dependencies = [
+ "cfg-if",
+ "once_cell",
+ "version_check",
+ "zerocopy",
+]
+
+[[package]]
 name = "aho-corasick"
 version = "1.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -61,6 +73,12 @@ checksum = "b2969dcb958b36655471fc61f7e416fa76033bdd4bfed0678d8fee1e2d07a1f0"
 dependencies = [
  "memchr",
 ]
+
+[[package]]
+name = "allocator-api2"
+version = "0.2.16"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0942ffc6dcaadf03badf6e6a2d0228460359d5e34b57ccdc720b7382dfbd5ec5"
 
 [[package]]
 name = "android-tzdata"
@@ -1154,6 +1172,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "crypto"
+version = "0.5.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "bf1e6e5492f8f0830c37f301f6349e0dac8b2466e4fe89eef90e9eef906cd046"
+dependencies = [
+ "crypto-common",
+]
+
+[[package]]
 name = "crypto-bigint"
 version = "0.5.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1652,6 +1679,40 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1a8bfa975b1aec2145850fcaa1c6fe269a16578c44705a532ae3edc92b8881c7"
 dependencies = [
  "cipher",
+]
+
+[[package]]
+name = "eccfs"
+version = "0.1.0"
+source = "git+https://github.com/Martinits/eccfs.git#1b8d52ae2ab1311c2e4829dad892e0da52a89572"
+dependencies = [
+ "aes",
+ "aes-gcm",
+ "bitflags 2.4.1",
+ "cmac",
+ "crypto 0.5.1",
+ "hex",
+ "libc",
+ "log",
+ "lru",
+ "md4",
+ "rand 0.8.5",
+ "rand_core 0.6.4",
+ "sha3",
+ "spin 0.9.8",
+ "thiserror",
+]
+
+[[package]]
+name = "eccfs-builder"
+version = "0.1.0"
+source = "git+https://github.com/Martinits/eccfs.git#1b8d52ae2ab1311c2e4829dad892e0da52a89572"
+dependencies = [
+ "eccfs",
+ "hex",
+ "libc",
+ "rand 0.8.5",
+ "rand_core 0.6.4",
 ]
 
 [[package]]
@@ -2221,6 +2282,10 @@ name = "hashbrown"
 version = "0.14.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "290f1a1d9242c78d09ce40a5e87e7554ee637af1351968159f4952f028f75604"
+dependencies = [
+ "ahash",
+ "allocator-api2",
+]
 
 [[package]]
 name = "heck"
@@ -2522,7 +2587,7 @@ version = "0.1.0"
 dependencies = [
  "assert-json-diff",
  "base64 0.21.5",
- "crypto",
+ "crypto 0.1.0",
  "kms",
  "resource_uri",
  "rstest",
@@ -2542,6 +2607,7 @@ dependencies = [
  "cfg-if",
  "devicemapper",
  "dircpy",
+ "eccfs-builder",
  "filetime",
  "flate2",
  "fs_extra",
@@ -2822,7 +2888,7 @@ dependencies = [
  "async-trait",
  "base64 0.21.5",
  "bincode",
- "crypto",
+ "crypto 0.1.0",
  "foreign-types 0.5.0",
  "kbs_protocol",
  "log",
@@ -2859,7 +2925,7 @@ dependencies = [
  "async-trait",
  "attester",
  "base64 0.21.5",
- "crypto",
+ "crypto 0.1.0",
  "jwt-simple",
  "kbs-types",
  "log",
@@ -2882,6 +2948,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "keccak"
+version = "0.1.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ecc2af9a1119c51f12a14607e783cb977bde58bc069ff0c3da1095e635d70654"
+dependencies = [
+ "cpufeatures",
+]
+
+[[package]]
 name = "kms"
 version = "0.1.0"
 dependencies = [
@@ -2891,7 +2966,7 @@ dependencies = [
  "bincode",
  "chrono",
  "const_format",
- "crypto",
+ "crypto 0.1.0",
  "ehsm_client",
  "hex",
  "kbs_protocol",
@@ -3072,6 +3147,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "lru"
+version = "0.12.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "db2c024b41519440580066ba82aab04092b333e09066a5eb86c7c4890df31f22"
+dependencies = [
+ "hashbrown 0.14.3",
+]
+
+[[package]]
 name = "lz4"
 version = "1.24.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3130,6 +3214,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d89e7ee0cfbedfc4da3340218492196241d89eefb6dab27de5df917a6d2e78cf"
 dependencies = [
  "cfg-if",
+ "digest 0.10.7",
+]
+
+[[package]]
+name = "md4"
+version = "0.10.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7da5ac363534dce5fabf69949225e174fbf111a498bf0ff794c8ea1fba9f3dda"
+dependencies = [
  "digest 0.10.7",
 ]
 
@@ -3552,7 +3645,7 @@ dependencies = [
  "base64 0.21.5",
  "base64-serde",
  "cfg-if",
- "crypto",
+ "crypto 0.1.0",
  "ctr",
  "hmac 0.12.1",
  "josekit",
@@ -4900,7 +4993,7 @@ dependencies = [
  "async-trait",
  "base64 0.21.5",
  "clap 4.2.7",
- "crypto",
+ "crypto 0.1.0",
  "kms",
  "rand 0.8.5",
  "rstest",
@@ -5301,6 +5394,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "sha3"
+version = "0.10.8"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "75872d278a8f37ef87fa0ddbda7802605cb18344497949862c0d4dcb291eba60"
+dependencies = [
+ "digest 0.10.7",
+ "keccak",
+]
+
+[[package]]
 name = "shadow-rs"
 version = "0.23.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -5470,6 +5573,9 @@ name = "spin"
 version = "0.9.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6980e8d7511241f8acf4aebddbb1ff938df5eebe98691418c4468d0b72a96a67"
+dependencies = [
+ "lock_api",
+]
 
 [[package]]
 name = "spki"
@@ -5693,7 +5799,7 @@ version = "0.1.0"
 dependencies = [
  "anyhow",
  "attester",
- "crypto",
+ "crypto 0.1.0",
 ]
 
 [[package]]

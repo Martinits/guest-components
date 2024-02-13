@@ -23,6 +23,8 @@ use crate::meta_store::{MetaStore, METAFILE};
 use crate::pull::PullClient;
 use crate::snapshots::{SnapshotType, Snapshotter};
 
+#[cfg(feature = "snapshot-eccfs")]
+use crate::snapshots::eccfs::EccOvlFs;
 #[cfg(feature = "snapshot-unionfs")]
 use crate::snapshots::occlum::unionfs::Unionfs;
 #[cfg(feature = "snapshot-overlayfs")]
@@ -150,6 +152,20 @@ impl ImageClient {
                 Box::new(occlum_unionfs) as Box<dyn Snapshotter>,
             );
         }
+
+        #[cfg(feature = "snapshot-eccfs")]
+        {
+            let eccfs = EccOvlFs {
+                data_dir: config
+                    .work_dir
+                    .join(SnapshotType::Eccfs.to_string()),
+            };
+            snapshots.insert(
+                SnapshotType::Eccfs,
+                Box::new(eccfs) as Box<dyn Snapshotter>,
+            );
+        }
+
         snapshots
     }
 

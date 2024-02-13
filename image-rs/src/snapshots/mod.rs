@@ -10,6 +10,8 @@ use std::path::{Path, PathBuf};
 pub mod occlum;
 #[cfg(feature = "snapshot-overlayfs")]
 pub mod overlay;
+#[cfg(feature = "snapshot-eccfs")]
+pub mod eccfs;
 
 /// Snapshot types.
 #[derive(Clone, Copy, Debug, Deserialize, PartialEq, Eq, Hash)]
@@ -20,6 +22,8 @@ pub enum SnapshotType {
     Overlay,
     #[cfg(feature = "snapshot-unionfs")]
     OcclumUnionfs,
+    #[cfg(feature = "snapshot-eccfs")]
+    Eccfs,
 }
 
 impl std::fmt::Display for SnapshotType {
@@ -30,6 +34,8 @@ impl std::fmt::Display for SnapshotType {
             Self::Overlay => "overlay",
             #[cfg(feature = "snapshot-unionfs")]
             Self::OcclumUnionfs => "occlum_unionfs",
+            #[cfg(feature = "snapshot-eccfs")]
+            Self::Eccfs => "eccfs",
         };
 
         write!(f, "{out}")

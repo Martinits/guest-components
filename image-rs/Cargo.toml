@@ -54,6 +54,8 @@ zstd = "0.12"
 nydus-api = { version = "0.3.0", optional = true}
 nydus-service = { version = "0.3.0", features = ["coco"], optional = true}
 
+eccfs-builder = { git = "https://github.com/Martinits/eccfs.git", optional = true }
+
 [build-dependencies]
 anyhow.workspace = true
 tonic-build = { workspace = true, optional = true }
@@ -79,11 +81,12 @@ tokio = { workspace = true, features = ["process"] }
 # exclude = ["scripts/attestation_agent/app"]
 
 [features]
+# default = ["enclave-cc-cckbc-rustls-tls"]
 default = ["snapshot-overlayfs", "signature-cosign-rustls", "keywrap-grpc", "oci-distribution-rustls"]
 
 # This will be based on `ring` dependency
 kata-cc-rustls-tls = ["encryption-ring", "keywrap-ttrpc", "snapshot-overlayfs", "signature-cosign-rustls", "signature-simple", "getresource", "oci-distribution/rustls-tls"]
-enclave-cc-cckbc-rustls-tls = ["encryption-ring", "keywrap-native", "snapshot-unionfs", "signature-simple", "getresource", "signature-cosign-rustls", "oci-distribution-rustls"]
+enclave-cc-cckbc-rustls-tls = ["encryption-ring", "keywrap-native", "snapshot-eccfs", "signature-simple", "getresource", "signature-cosign-rustls", "oci-distribution-rustls"]
 
 # This will be based on `openssl` dependency
 kata-cc-native-tls = ["encryption-openssl", "keywrap-ttrpc", "snapshot-overlayfs", "signature-cosign-native", "signature-simple", "getresource", "oci-distribution/native-tls"]
@@ -117,6 +120,7 @@ signature-simple = ["signature", "sequoia-openpgp", "serde_yaml"]
 
 snapshot-overlayfs = ["nix"]
 snapshot-unionfs = ["nix", "dircpy", "fs_extra"]
+snapshot-eccfs = ["nix", "fs_extra", "eccfs-builder"]
 
 getresource = [ "lazy_static", "cfg-if" ]
 
