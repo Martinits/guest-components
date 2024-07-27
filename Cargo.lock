@@ -1684,7 +1684,7 @@ dependencies = [
 [[package]]
 name = "eccfs"
 version = "0.1.0"
-source = "git+https://github.com/Martinits/eccfs.git#1b8d52ae2ab1311c2e4829dad892e0da52a89572"
+source = "git+https://github.com/Martinits/eccfs.git#bea28ad63514747b52dd800be6e62e077b80b8bf"
 dependencies = [
  "aes",
  "aes-gcm",
@@ -1706,7 +1706,7 @@ dependencies = [
 [[package]]
 name = "eccfs-builder"
 version = "0.1.0"
-source = "git+https://github.com/Martinits/eccfs.git#1b8d52ae2ab1311c2e4829dad892e0da52a89572"
+source = "git+https://github.com/Martinits/eccfs.git#bea28ad63514747b52dd800be6e62e077b80b8bf"
 dependencies = [
  "eccfs",
  "hex",
